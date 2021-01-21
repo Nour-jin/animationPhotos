@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Loading Animations</title>
+    <meta name="description" content="Some inspiration for loading animations on grid items" />
+    <meta name="keywords" content="loading, animation, grid, animation, effects, inspiration, web design" />
+    <meta name="author" content="Codrops" />
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:300,500,700" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="css/demo.css" />
+    <link rel="stylesheet" type="text/css" href="sponsor/pater.css" />
+    <script>
+        document.documentElement.className = "js";
+    </script>
+</head>
+
+<body class="loading">
+    <main>
+        <header class="codrops-header"></header>
+
+        <div class="content content--side"></div>
+
+        <div class="content content--side content--right">
+            <div class="control control--effects">
+                <span class="control__title">run effect</span>
+                <button class="control__btn" data-fx="Hapi">Hapi</button>
+                <button class="control__btn" data-fx="Amun">Amun</button>
+                <button class="control__btn" data-fx="Kek">Kek</button>
+                <button class="control__btn" data-fx="Isis">Isis</button>
+                <button class="control__btn" data-fx="Montu">Montu</button>
+                <button class="control__btn" data-fx="Osiris">Osiris</button>
+                <button class="control__btn" data-fx="Satet">Satet</button>
+                <button class="control__btn" data-fx="Atum">Atum</button>
+                <button class="control__btn" data-fx="Ra">Ra</button>
+                <button class="control__btn" data-fx="Sobek">Sobek</button>
+                <button class="control__btn" data-fx="Ptah">Ptah</button>
+                <button class="control__btn" data-fx="Bes">Bes</button>
+                <button class="control__btn" data-fx="Seker">Seker</button>
+                <button class="control__btn" data-fx="Nut">Nut</button>
+                <button class="control__btn" data-fx="Shu">Shu</button>
+
+            </div>
+        </div>
+        <div class="content content--center">
+            <div class="grid grid--type-b">
+                <div class="grid__sizer">
+                    <div class="grid__item">
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="next" data-fx="Hapi">
+            <button>next</button>
+        </div>
+        <div class="prev">
+            <button>prev</button>
+        </div>
+    </main>
+
+    <button id="getPicture">
+        Random Pictures
+      </button>
+    <div class="photos"></div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="js/imagesloaded.pkgd.min.js"></script>
+    <script src="js/masonry.pkgd.min.js"></script>
+    <script src="js/anime.min.js"></script>
+    <script src="js/main.js"></script>
+
+    <script>
+        var page = "2";
+        const photos = document.querySelector('.grid');
+
+        function getPicture() {
+            fetch('https://api.unsplash.com/photos?&per_page=10&page=' + page + '&client_id=11f2ff5a50fcce4df43aa4c897d132d3f5ad4a84ed0aec7be67718deb5120192')
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data)
+                    let photo = "";
+                    data.forEach(img => {
+
+                        var image = img.urls.small;
+                        photo += '<img src="' + image + '" alt="">';
+
+                    });
+                    document.getElementById('getPicture').addEventListener('click', (e) => {
+                        photos.innerHTML = photo;
+
+                    })
+
+                })
+
+        }
+        getPicture();
+
+
+        /*
+        var page = '1';
+
+        function getData() {
+            $.getJSON('https://api.unsplash.com/photos?&per_page=10&page=' + page + '&client_id=11f2ff5a50fcce4df43aa4c897d132d3f5ad4a84ed0aec7be67718deb5120192', function(data) {
+                console.log(data);
+
+                $(".grid").empty()
+                var imageList = data;
+
+                $.each(imageList, function(i, noor) {
+                    var imageURL = noor.urls.regular;
+                    $('.grid').append('<div class="grid__sizer"><div class="grid__item"><a class="grid__link" href="#"><img class="grid__img" src="' + imageURL + '" alt="Some image" /></a></div></div>');
+
+
+                    if (page > 1) {
+                        $('.prev').css({
+                            'visibility': 'visible'
+                        })
+                    } else {
+                        $('.prev').css({
+                            'visibility': 'hidden'
+                        });
+                    }
+                });
+            })
+        }
+
+        $('.next').on('click', function(ev) {
+            page++;
+            getData()
+            console.log(page)
+        });
+
+        $('.prev').on('click', function() {
+            page--;
+            getData()
+            console.log(page)
+        });
+
+        const myPromise = new Promise(function(success, failure) {
+            getData()
+        })
+        myPromise.then((success) => {
+            console.log(success, "its work")
+        })
+        myPromise.catch((failure) => {
+            console.log(failure, "not work")
+        })
+        */
+    </script>
+</body>
+
+</html>
