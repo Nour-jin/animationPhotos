@@ -2,9 +2,6 @@
 
 Some inspiration for loading effects on grid items.
 
-[Article on Codrops](https://tympanus.net/codrops/?p=30656)
-
-[Demo](http://tympanus.net/Development/GridLoadingAnimations/)
 
 ## Credits
 
